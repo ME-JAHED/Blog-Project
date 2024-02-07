@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="d-flex flex-wrap justify-content-center p-3">
+        {% for post in data %}
+        <div class="col-sm-6 mb-3 mb-sm-0 p-2">
+          <div class="card bg-warning">
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text">{{post.content}}</p>
+              <p>Author : {{ post.author.name }}</p>
+              <p>Category : {% for cat in post.category.all %} <a class="btn btn-danger disabled">{{cat.name}}</a>
+                {% endfor %}
+              </p>
+              <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+{% endblock %}
